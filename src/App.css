@@ -1,0 +1,134 @@
+/* General css*/
+:root {
+    --light-color: #6d6d6e;
+    --body-color: #161E20;
+    --light-bg: #45494A;
+    --dark-color: #161616;
+    --border: rgb(235, 235, 235);
+    --primary-color: #006D86;
+}
+
+body {
+    background-color: #161E20 !important;
+}
+
+h3 {
+    color: white !important;
+    margin-bottom: 15px !important;
+}
+
+.dark-btn {
+    background-color: var(--dark-color) !important;
+    border: none !important;
+}
+
+.primary-btn {
+    background-color: var(--primary-color) !important;
+    border: none !important;
+}
+
+.primary-btn-outline {
+    border: 1px solid var(--primary-color) !important;
+    background-color: transparent !important;
+}
+
+p {
+    margin: 0 !important;
+}
+
+a {
+    text-decoration: none !important;
+    color: white !important;
+}
+
+h3::before {
+    background-color: red;
+    width: 3px;
+    height: 7px;
+    top: 0;
+    left: 2%;
+}
+
+/* Home page */
+.home-hero-section {
+    background-image: url("./assets/home-hero-img.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 500px;
+}
+
+/* Auth page */
+.auth-page-hero-section {
+    background-image: url("./assets/authenticate-page-hero-section.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.auth-page-hero-overlay {
+    background-color: #161616;
+    opacity: 0.7;
+}
+
+.login-form .input {
+    display: flex;
+    align-items: center;
+}
+
+.login-form .input {
+    background-color: var(--light-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px;
+}
+
+.login-form input {
+    background-color: transparent !important;
+    border: none;
+    color: white !important;
+}
+
+.login-form input::placeholder {
+    color: rgb(190, 190, 190) !important;
+}
+
+/* footer */
+.footer-bg {
+    background-image: url("./assets/footer-img.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.footer-bg-overlay {
+    background-color: rgba(22, 22, 22, .5);
+}
+
+/* membership */
+.membership-span h6 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.membership-span span {
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+/* contact */
+.contact-form .input {
+    background-color: var(--light-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    background-color: transparent !important;
+    border: none;
+    color: white !important;
+}
