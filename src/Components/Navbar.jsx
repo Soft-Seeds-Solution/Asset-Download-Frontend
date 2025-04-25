@@ -5,6 +5,9 @@ import SubCategoryContext from "../ContextApi/SubCategoryCntext";
 import ProductContext from "../ContextApi/ProductContext";
 import UserContext from "../ContextApi/UserContext";
 import UserImg from "../assets/user-logo.png"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome, faInfoCircle, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+
 const MainNavbar = () => {
     const [hoveredCat, setHoveredCat] = useState(null);
     const { allSubCategory } = useContext(SubCategoryContext);
@@ -45,7 +48,7 @@ const MainNavbar = () => {
                 <Navbar.Collapse id="main-navbar-nav">
                     <Nav className="me-auto position-relative">
                         <Nav.Link as={Link} to="/" className="text-white me-3">
-                            Home
+                            <FontAwesomeIcon icon={faHome} style={{ color: "var(--body-color)" }} />  Home
                         </Nav.Link>
                         <NavDropdown title="Categories" id="categories-nav-dropdown" >
                             {uniqueCategories?.map((cat) => (
@@ -98,10 +101,10 @@ const MainNavbar = () => {
 
                         </NavDropdown>
                         <Nav.Link as={Link} to="/about" className="text-white me-3">
-                            About
+                            <FontAwesomeIcon icon={faInfoCircle} style={{ color: "var(--body-color)" }} /> About
                         </Nav.Link>
                         <Nav.Link as={Link} to="/contact" className="text-white me-3">
-                            Contact
+                            <FontAwesomeIcon icon={faEnvelope} style={{ color: "var(--body-color)" }} /> Contact
                         </Nav.Link>
                     </Nav>
                     {!signUser?.role && (
