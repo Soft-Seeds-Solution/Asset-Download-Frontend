@@ -31,6 +31,7 @@ import ProtectedRoute from './Components/ProtectedRoute';
 import AdminRoute from './Components/AdminRoute';
 import AboutPage from './Pages/About/AboutPage';
 import ContactUsPage from './Pages/Contact/ContactUsPage';
+import PortfolioProducts from './Pages/ProductDetail/PortfolioProducts';
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function AllRoutes() {
       <Route path="/:category" element={<CategorySpecificProducts />} />
       <Route path="/:category/:subCategory" element={<SubCategorySpecificProducts />} />
       <Route path="/all/:productListing" element={<AllProducts />} />
+      <Route path="/portfolio/:portfolio" element={<PortfolioProducts />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/signin" element={<Login />} />
 

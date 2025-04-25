@@ -20,14 +20,15 @@ function UploadProduct() {
         subCategoryId: "",
         title: "",
         featureImg: null,
-        sourceCode: null,
+        thumbnail: null,
         screenshots: [],
         userId: "",
         authorName: "",
         directUrl: "",
         downloadUrl: "",
         accessLevel: "",
-        version: ""
+        version: "",
+        sampleUrl: ""
     })
     const [quillData, setQuillData] = useState({
         description: "",
@@ -49,17 +50,19 @@ function UploadProduct() {
         { name: "description", value: quillData.description, label: "Description", type: "textarea", star: "*" },
         { name: "features", value: quillData.features, label: "Features", type: "textarea", star: "*" },
         { name: "featureImg", label: "Feature Image", type: "file", star: "*" },
+        { name: "thumbnail", label: "Thumbnail", type: "file", star: "*" },
         { name: "screenshots", label: "Screenshots", type: "file" },
         { name: "authorName", value: product.authorName, label: "Author Studio Name", type: "text", star: "*" },
         { name: "version", value: product.version, label: "Version", type: "text" },
         { name: "directUrl", value: product.directUrl, label: "Direct Url", type: "text" },
         { name: "downloadUrl", value: product.downloadUrl, label: "Download Url", type: "text" },
+        { name: "sampleUrl", value: product.sampleUrl, label: "Sample Url", type: "text" },
     ]
 
     const uploadProductFn = async (e) => {
         e.preventDefault()
 
-        const { categoryId, subCategoryId, title, featureImg, screenshots, authorName, directUrl, downloadUrl, accessLevel, version } = product
+        const { categoryId, subCategoryId, title, thumbnail, featureImg, screenshots, authorName, directUrl, downloadUrl, accessLevel, version, sampleUrl } = product
         const { features, description } = quillData
         const formData = new FormData()
         formData.append("title", title)
@@ -70,9 +73,11 @@ function UploadProduct() {
         formData.append("features", features)
         formData.append("description", description)
         formData.append("featureImg", featureImg)
+        formData.append("thumbnail", thumbnail)
         formData.append("authorName", authorName)
         formData.append("directUrl", directUrl)
         formData.append("version", version)
+        formData.append("sampleUrl", sampleUrl)
         formData.append("accessLevel", accessLevel)
         formData.append("downloadUrl", downloadUrl)
         screenshots?.forEach(file => formData.append("screenshots", file))
@@ -98,12 +103,14 @@ function UploadProduct() {
                 subCategoryId: "",
                 title: "",
                 featureImg: null,
+                thumbnail: null,
                 screenshots: [],
                 authorName: "",
                 directUrl: "",
                 downloadUrl: "",
                 accessLevel: "",
-                version: ""
+                version: "",
+                sampleUrl: ""
             })
 
             setQuillData({

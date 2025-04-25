@@ -3,12 +3,12 @@ import ProductContext from "../../ContextApi/ProductContext";
 import { Card, Col, Container, Image, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 
-export default function AllProducts() {
+export default function PortfolioProducts() {
     const { products, productViewsFn } = useContext(ProductContext)
-    const { productListing } = useParams()
-    const changeTitle = productListing?.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
-
-    const listingPoducts = productListing === "recently-added" ? [...products].reverse() : productListing === "top-views" ? [...products]?.sort((a, b) => b.views - a.views) : productListing === ""
+    const { portfolio } = useParams()
+    const changeTitle = portfolio?.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
+    const PortfolioName = portfolio?.replace(/-/g, " ")
+    const listingPoducts = products?.filter(product => product.authorName === PortfolioName)
 
     return (
         <div className="py-4">

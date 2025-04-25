@@ -159,25 +159,20 @@ export default function ProductDetailPage() {
                                             </Button>
                                         )}
 
-                                        {/* {signUser?.role && IsActiveMembershipPlan ? (
-                                            (filterProduct.accessLevel === "Premium" || filterProduct.accessLevel === "Both") && (
-                                                <Button
-                                                    
-                                                    className="primary-btn"
-                                                >
-                                                    Premium Download
-                                                </Button>
-                                            )
-                                        ) : ( */}
                                         {(filterProduct.accessLevel === "Premium" || filterProduct.accessLevel === "Both") && (
                                             <Button onClick={() => downloadFn(filterProduct.directUrl, filterProduct.title, filterProduct._id)} className="primary-btn">
                                                 Premium Download
                                             </Button>
                                         )}
 
-
                                     </div>
                                 </div>
+                                {(filterProduct.sampleUrl && filterProduct.sampleUrl !== "undefined") && (
+                                    <div className="d-flex align-items-center mt-4">
+                                        <h6 className="me-3">For more details about this asset:</h6>
+                                        <Button as="a" target="_blank" rel="noopener noreferrer" className="primary-btn" href={`/check-adblock?link=${encodeURIComponent(filterProduct.sampleUrl)}`}>Click Here</Button>
+                                    </div>
+                                )}
                             </Col>
                         </Row>
                         <Row>
@@ -196,7 +191,7 @@ export default function ProductDetailPage() {
                                     </div>
                                     <div className="my-3" style={{ width: "100%", height: "1px", backgroundColor: "var(--border)" }}></div>
                                     <div className="d-flex justify-content-center">
-                                        <Button as={Link} to={`/${filterProduct.authorName.replace(/\s+/g, "-")}/portfolio`} className="dark-btn py-2">View Portfolio</Button>
+                                        <Button as={Link} to={`/portfolio/${filterProduct.authorName.replace(/\s+/g, "-")}`} className="dark-btn py-2">View Portfolio</Button>
                                     </div>
                                 </div>
                             </Col>
@@ -220,7 +215,7 @@ export default function ProductDetailPage() {
                             {filterProduct?.youtubeLink ? (
                                 <p className=" mb-5" style={{ fontSize: "25px" }}>{screenInd === "" ? 1 : screenInd + 2}/{filterProduct?.screenshots?.length + 1}</p>
                             ) : (
-                                <p className=" mb-5" style={{ fontSize: "25px" }}>{screenInd + 1}/{filterProduct?.screenshots?.length}</p>
+                                <p className=" mb-5 text-white" style={{ fontSize: "25px" }}>{screenInd + 1}/{filterProduct?.screenshots?.length}</p>
                             )}
 
                             {filterProduct?.youtubeLink ? (

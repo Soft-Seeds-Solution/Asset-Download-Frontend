@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import SubCategoryContext from "../ContextApi/SubCategoryCntext";
 import ProductContext from "../ContextApi/ProductContext";
 import UserContext from "../ContextApi/UserContext";
-import UserImg from "../assets/user-img.avif"
+import UserImg from "../assets/user-logo.png"
 const MainNavbar = () => {
     const [hoveredCat, setHoveredCat] = useState(null);
     const { allSubCategory } = useContext(SubCategoryContext);
@@ -105,9 +105,18 @@ const MainNavbar = () => {
                         </Nav.Link>
                     </Nav>
                     {!signUser?.role && (
-                        <p style={{ fontSize: "18px", color: "white" }}><Link to="/signin">Login</Link> / <Link to="/signup">Sign Up</Link></p>
+                        <div className="d-flex align-items-center">
+                            <p className="me-2" style={{ fontSize: "18px", color: "white" }}><Link to="/signin">Login</Link> / <Link to="/signup">Sign Up</Link></p>
+                            <img
+                                src={UserImg}
+                                alt=""
+                                className="img-fluid me-2"
+                                style={{ width: "30px" }}
+                            />
+                        </div>
                     )}
                     {signUser && (
+
                         <DropdownButton
                             id="dropdown-basic-button"
                             className="user-drop"

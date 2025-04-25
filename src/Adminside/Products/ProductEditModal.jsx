@@ -37,11 +37,12 @@ export default function ProductEditModal({ productId }) {
         { name: "description", value: productById.description, label: "Description", type: "textarea" },
         { name: "features", value: productById.features, label: "Features", type: "textarea" },
         { name: "featureImg", label: "Feature Image", value: productById.featureImg, type: "file" },
+        { name: "thumbnail", label: "Thumbnail", value: productById.thumbnail, type: "file" },
         { name: "authorName", value: productById.authorName, label: "Author Studio Name", type: "text" },
-        { name: "version", value: productById.directUrl, label: "Direct Url", type: "text" },
         { name: "version", value: productById.version, label: "Version", type: "text" },
+        { name: "version", value: productById.directUrl, label: "Direct Url", type: "text" },
         { name: "downloadUrl", value: productById.downloadUrl, label: "Download Url", type: "text" },
-        { name: "downloadUrl", value: productById.downloadUrl, label: "Download Url", type: "text" },
+        { name: "sampleUrl", value: productById.sampleUrl, label: "Sample Url", type: "text" },
     ]
 
     const updateProductFn = async (e) => {
@@ -54,7 +55,7 @@ export default function ProductEditModal({ productId }) {
             denyButtonText: `Don't save`,
         });
         if (isConfirmed) {
-            const { type, categoryId, subCategoryId, frameWork, title, featureImg, thumbnail, youtubeLink, googlePlayLink, appStoreLink, singleAppLicense, multiAppLicense, developmentHours, authorName, features, description, accessLevel, version } = productById
+            const { type, categoryId, subCategoryId, frameWork, title, featureImg, thumbnail, youtubeLink, googlePlayLink, appStoreLink, singleAppLicense, multiAppLicense, developmentHours, authorName, features, description, accessLevel, version, sampleUrl } = productById
             const formData = new FormData()
             formData.append("type", type)
             formData.append("title", title)
@@ -71,6 +72,7 @@ export default function ProductEditModal({ productId }) {
             formData.append("googlePlayLink", googlePlayLink)
             formData.append("appStoreLink", appStoreLink)
             formData.append("version", version)
+            formData.append("sampleUrl", sampleUrl)
             formData.append("singleAppLicense", singleAppLicense)
             formData.append("accessLevel", accessLevel)
             formData.append("multiAppLicense", multiAppLicense)
