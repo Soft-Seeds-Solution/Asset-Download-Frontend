@@ -42,8 +42,8 @@ const AdBlockCheck = () => {
 
   return (
     <Container className="text-center mt-5">
-      <h2 className="mb-3">Checking your browser...</h2>
-      {checking && <Spinner animation="border" />}
+      <h2 className="mb-3 text-white">Checking your browser...</h2>
+      {checking && <Spinner animation="border" style={{ color: "white" }} />}
       {!checking && adBlockDetected && (
         <>
           <Alert variant="danger">

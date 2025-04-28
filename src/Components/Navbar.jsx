@@ -119,7 +119,6 @@ const MainNavbar = () => {
                         </div>
                     )}
                     {signUser && (
-
                         <DropdownButton
                             id="dropdown-basic-button"
                             className="user-drop"

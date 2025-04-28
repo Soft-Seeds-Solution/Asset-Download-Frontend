@@ -32,16 +32,16 @@ export default function ProductEditModal({ productId }) {
     const productFormData = [
         { name: "categoryId", value: productById.categoryId?._id, label: "Category", type: "select", options: [...allCategories] },
         { name: "subCategoryId", value: productById.subCategoryId?._id, label: "Sub Category", type: "select", options: [...allSubCategories] },
-        { name: "accessLevel", value: productById.accessLevel, label: "Access Level", type: "radio", options: ["Free", "Premium", "Both"] },
+        // { name: "accessLevel", value: productById.accessLevel, label: "Access Level", type: "radio", options: ["Free", "Premium", "Both"] },
         { name: "title", value: productById.title, label: "Title", type: "text" },
         { name: "description", value: productById.description, label: "Description", type: "textarea" },
         { name: "features", value: productById.features, label: "Features", type: "textarea" },
         { name: "featureImg", label: "Feature Image", value: productById.featureImg, type: "file" },
         { name: "thumbnail", label: "Thumbnail", value: productById.thumbnail, type: "file" },
         { name: "authorName", value: productById.authorName, label: "Author Studio Name", type: "text" },
-        { name: "version", value: productById.version, label: "Version", type: "text" },
-        { name: "version", value: productById.directUrl, label: "Direct Url", type: "text" },
-        { name: "downloadUrl", value: productById.downloadUrl, label: "Download Url", type: "text" },
+        // { name: "version", value: productById.directUrl, label: "Direct Url", type: "text" },
+        // { name: "version", value: productById.version, label: "Version", type: "text" },
+        // { name: "downloadUrl", value: productById.downloadUrl, label: "Download Url", type: "text" },
         { name: "sampleUrl", value: productById.sampleUrl, label: "Sample Url", type: "text" },
     ]
 
@@ -55,7 +55,7 @@ export default function ProductEditModal({ productId }) {
             denyButtonText: `Don't save`,
         });
         if (isConfirmed) {
-            const { type, categoryId, subCategoryId, frameWork, title, featureImg, thumbnail, youtubeLink, googlePlayLink, appStoreLink, singleAppLicense, multiAppLicense, developmentHours, authorName, features, description, accessLevel, version, sampleUrl } = productById
+            const { type, categoryId, subCategoryId, frameWork, title, featureImg, thumbnail, youtubeLink, googlePlayLink, appStoreLink, singleAppLicense, multiAppLicense, developmentHours, authorName, features, description, versions, sampleUrl } = productById
             const formData = new FormData()
             formData.append("type", type)
             formData.append("title", title)
@@ -71,10 +71,9 @@ export default function ProductEditModal({ productId }) {
             formData.append("youtubeLink", youtubeLink)
             formData.append("googlePlayLink", googlePlayLink)
             formData.append("appStoreLink", appStoreLink)
-            formData.append("version", version)
+            formData.append("versions", JSON.stringify(versions));
             formData.append("sampleUrl", sampleUrl)
             formData.append("singleAppLicense", singleAppLicense)
-            formData.append("accessLevel", accessLevel)
             formData.append("multiAppLicense", multiAppLicense)
             formData.append("developmentHours", developmentHours)
             formData.append("authorName", authorName)
@@ -112,6 +111,20 @@ export default function ProductEditModal({ productId }) {
         }
     }, [productById]);
 
+    const handleVersionChange = (ind, e) => {
+        const { name, value } = e.target
+        const updatedVersion = productById.versions?.map((version, i) => i === ind ? { ...version, [name]: value } : version)
+        setProductById({ ...productById, versions: updatedVersion })
+    }
+    const removeVersion = (ind) => {
+        if (productById.versions?.length > 1) {
+            const newVersions = productById.versions?.filter((_, i) => i !== ind)
+            setProductById({ ...productById, versions: newVersions })
+        }
+    }
+    const addVersion = () => {
+        setProductById({ ...productById, versions: [...productById.versions, { version: '', directUrl: '', downloadUrl: '' }] })
+    }
     return (
         <>
             <FontAwesomeIcon icon={faEdit} className="me-3" onClick={() => openEditModal()} />
@@ -171,6 +184,45 @@ export default function ProductEditModal({ productId }) {
                                 )}
                             </Form.Group>
                         ))}
+                        <h4 className='mt-4'>Versions</h4>
+                        {productById.versions?.map((ver, idx) => (
+                            <Row key={idx} className="g-3 align-items-end">
+                                <Col md={3}>
+                                    <Form.Label>Version *</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="version"
+                                        value={ver.version}
+                                        onChange={(e) => handleVersionChange(idx, e)}
+                                    />
+                                </Col>
+                                <Col md={4}>
+                                    <Form.Label>Direct URL</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="directUrl"
+                                        value={ver.directUrl}
+                                        onChange={(e) => handleVersionChange(idx, e)}
+                                    />
+                                </Col>
+                                <Col md={4}>
+                                    <Form.Label>Download URL</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="downloadUrl"
+                                        value={ver.downloadUrl}
+                                        onChange={(e) => handleVersionChange(idx, e)}
+                                    />
+                                </Col>
+                                {(idx !== 0) && (
+                                    <Col md={1}>
+                                        <Button variant="danger" onClick={() => removeVersion(idx)}>-</Button>
+                                    </Col>
+                                )}
+                            </Row>
+                        ))}
+                        <Button className="my-3" onClick={addVersion}>+ Add Version</Button>
+
                         <div className="d-flex justify-content-center">
                             <Button type='submit' className='mt-3'>Update Product</Button>
                         </div>

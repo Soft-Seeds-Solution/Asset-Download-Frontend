@@ -19,7 +19,7 @@ export default function ManageProducts() {
                     {filterProduct?.map((product, ind) => (
                         <div style={{ backgroundColor: "var(--dark)", borderRadius: "10px" }} className="d-flex justify-content-between align-items-center px-3 py-2 mb-3" key={ind}>
                             <div className="d-flex">
-                                <Image className="me-3" src={product.featureImg} style={{ width: "40px", height: "40px", borderRadius: "5px" }} />
+                                <Image className="me-3" src={product.thumbnail} style={{ width: "40px", height: "40px", borderRadius: "5px" }} />
                                 <div>
                                     <p>{product.title}</p>
                                     <p style={{ color: "var(--border)" }}>Category : {product.categoryId?.category}</p>

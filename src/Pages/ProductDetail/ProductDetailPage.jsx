@@ -149,23 +149,32 @@ export default function ProductDetailPage() {
                                     <div className="mt-3">
                                         <h6 style={{ fontSize: "18px" }}>Category : <span style={{ fontWeight: "lighter", fontSize: "15px" }}>{filterProduct.categoryId?.category}</span></h6>
                                         <h6 style={{ fontSize: "18px" }}>Sub Category : <span style={{ fontWeight: "lighter", fontSize: "15px" }}>{filterProduct.subCategoryId?.subCategory}</span></h6>
-                                        <h6 style={{ fontSize: "18px" }}>Version : <span style={{ fontWeight: "lighter", fontSize: "15px" }}>{filterProduct.version}</span></h6>
                                     </div>
-                                    <div className="mt-3">
-                                        {(filterProduct.accessLevel === "Free" || filterProduct.accessLevel === "Both") && (
-                                            <Button as="a" className="me-3 dark-btn" href={`/check-adblock?link=${encodeURIComponent(filterProduct.downloadUrl)}`}
-                                                target="_blank" rel="noopener noreferrer">
-                                                Free Download
-                                            </Button>
-                                        )}
 
-                                        {(filterProduct.accessLevel === "Premium" || filterProduct.accessLevel === "Both") && (
-                                            <Button onClick={() => downloadFn(filterProduct.directUrl, filterProduct.title, filterProduct._id)} className="primary-btn">
-                                                Premium Download
-                                            </Button>
-                                        )}
-
-                                    </div>
+                                </div>
+                                <div style={{ backgroundColor: "var(--light-bg)", borderRadius: "15px", border: "0.5px solid var(--border)" }} className="p-4 mt-3">
+                                    {filterProduct.versions?.map((version, ind) => (
+                                        <div key={ind} className="mt-3">
+                                            {version.version && (
+                                                <div>
+                                                    <h6>Version : <span style={{ fontWeight: "lighter", fontSize: "15px" }}>{version.version}</span></h6>
+                                                </div>
+                                            )}
+                                            <div>
+                                                {version.downloadUrl && (
+                                                    <Button as="a" className="me-3 dark-btn" href={`/check-adblock?link=${encodeURIComponent(version.downloadUrl)}`}
+                                                        target="_blank" rel="noopener noreferrer">
+                                                        Free Download
+                                                    </Button>
+                                                )}
+                                                {version.directUrl && (
+                                                    <Button onClick={() => downloadFn(version.directUrl, version.title, version._id)} className="primary-btn">
+                                                        Premium Download
+                                                    </Button>
+                                                )}
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                                 {(filterProduct.sampleUrl && filterProduct.sampleUrl !== "undefined") && (
                                     <div className="d-flex align-items-center mt-4">
@@ -252,12 +261,11 @@ export default function ProductDetailPage() {
                 <Row>
                     {products?.filter(product => product.categoryId?.category === filterProduct.categoryId?.category).map((product, ind) => (
                         <Col md={3} key={ind}>
-                            <Link style={{ textDecoration: "none" }} to={`/detail-page/${product.title.replace(/\s+/g, "-")}`}>
-                                <Card onClick={() => productViewsFn(product._id)}>
-                                    <Image src={product.featureImg} style={{ height: "200px" }} />
-                                    <div className="p-4 text-white" style={{ backgroundColor: "var(--light-color)" }}>
-                                        <h6>{product.title.length > 25 ? product.title.slice(0, 25) + "..." : product.title}</h6>
-                                        <h6>Category:{product.categoryId?.category}</h6>
+                            <Link to={`/detail-page/${product.title.replace(/\s+/g, "-")}`}>
+                                <Card style={{ border: "1px solid white", borderRadius: "10px", backgroundColor: "var(--light-bg)" }} onClick={() => productViewsFn(product._id)}>
+                                    <Image src={product.thumbnail} style={{ height: "250px", borderRadius: "10px" }} />
+                                    <div>
+                                        <h6 className="text-white p-3">{product.title?.length > 28 ? product.title.slice(0, 28) + "..." : product.title}</h6>
                                     </div>
                                 </Card>
                             </Link>

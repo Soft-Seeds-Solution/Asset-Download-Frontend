@@ -23,8 +23,6 @@ export default function ProdcutViewModal({ productId }) {
         { name: "featureImg", label: "Feature Image", value: productById.featureImg, type: "file", star: "*" },
         { name: "screenshots", label: "Screenshots", value: productById.screenshots, type: "file", star: "*" },
         { name: "authorName", value: productById.authorName, label: "Author Studio Name", type: "text", star: "*" },
-        { name: "directUrl", value: productById.directUrl, label: "Direct Url", type: "text", star: "*" },
-        { name: "downloadUrl", value: productById.downloadUrl, label: "Download Url", type: "text", star: "*" },
     ]
     return (
         <>
@@ -71,7 +69,35 @@ export default function ProdcutViewModal({ productId }) {
                             )}
                         </Form.Group>
                     ))}
-
+                    <h4 className='mt-4'>Versions</h4>
+                    {productById.versions?.map((ver, idx) => (
+                        <Row key={idx} className="g-3 align-items-end">
+                            <Col md={3}>
+                                <Form.Label>Version</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="version"
+                                    value={ver.version}
+                                />
+                            </Col>
+                            <Col md={4}>
+                                <Form.Label>Direct URL</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="directUrl"
+                                    value={ver.directUrl}
+                                />
+                            </Col>
+                            <Col md={4}>
+                                <Form.Label>Download URL</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="downloadUrl"
+                                    value={ver.downloadUrl}
+                                />
+                            </Col>
+                        </Row>
+                    ))}
                 </Modal.Body>
             </Modal>
         </>
